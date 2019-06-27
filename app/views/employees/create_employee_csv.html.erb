@@ -1,0 +1,27 @@
+<%= form_tag save_csv_data_path , method: "POST", multipart: true do  %>
+
+    <% if @message.present? %>
+       <div id="error_explanation">
+         <ul>
+           <% @message.each do |message| %>
+             <li><%= message %></li>
+           <% end %>
+         </ul>
+       </div>
+    <% end %>
+
+    <div class="field">
+      <%= label_tag 'select company' %>
+      <%= select_tag 'company_id', options_for_select(@company.collect{ |u| [u.name, u.id] }) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'Upload csv' %>
+      <%= file_field_tag "file" %>
+    </div>
+
+    <div class="actions">
+      <%= submit_tag 'Upload' %>
+    </div>
+
+<% end %>
